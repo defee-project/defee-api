@@ -1,11 +1,11 @@
-package org.team.defee.controller;
+package org.team.defee.member.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.team.defee.domain.Member;
-import org.team.defee.service.MemberService;
+import org.team.defee.member.entity.Member;
+import org.team.defee.member.service.MemberService;
 
 import java.util.List;
 
