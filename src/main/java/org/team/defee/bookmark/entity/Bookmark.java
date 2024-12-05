@@ -1,10 +1,9 @@
-package org.team.defee.domain;
+package org.team.defee.bookmark.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
+import org.team.defee.member.entity.Member;
 
 @Entity
 @Getter

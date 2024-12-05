@@ -1,9 +1,9 @@
-package org.team.defee.repository;
+package org.team.defee.bookmark.repository;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.team.defee.domain.Bookmark;
+import org.team.defee.bookmark.entity.Bookmark;
 
 import java.util.List;
 

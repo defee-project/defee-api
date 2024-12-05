@@ -1,9 +1,9 @@
-package org.team.defee.repository;
+package org.team.defee.member.repository;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.team.defee.domain.Member;
+import org.team.defee.member.entity.Member;
 
 import java.util.List;
 

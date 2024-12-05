@@ -1,10 +1,10 @@
-package org.team.defee.service;
+package org.team.defee.member.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.team.defee.domain.Member;
-import org.team.defee.repository.MemberRepository;
+import org.team.defee.member.entity.Member;
+import org.team.defee.member.repository.MemberRepository;
 
 import java.util.List;
 
