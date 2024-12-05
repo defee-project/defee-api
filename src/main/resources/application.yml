@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: defee
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/defee
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+#    url: jdbc:mysql://defee:defee2024@defee_db:3306/defee
+#    username: root
+#    password: defee2024
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.orm.jdbc.bind: trace
