@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.team.defee.member.entity.Member;
+import org.team.defee.post.entity.Post;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,5 +24,6 @@ public class Bookmark {
     @JoinColumn(name = "user_id") // 외래키 칼럼 이름을 user_id로 설정
     private Member member;
 
-//    private List<>
+    @ManyToMany(mappedBy = "bookmarks")
+    private List<Post> posts;
 }
