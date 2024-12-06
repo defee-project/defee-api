@@ -12,8 +12,9 @@ import java.util.List;
 public class BookmarkRepository {
     private final EntityManager em;
 
-    public void save(Bookmark bookmark){
+    public Bookmark save(Bookmark bookmark){
         em.persist(bookmark);
+        return bookmark;
     }
 
     public Bookmark findOne(Long id){
