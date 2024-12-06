@@ -4,16 +4,20 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.team.defee.member.dto.LoginDto;
+import org.team.defee.member.dto.RegisterDto;
 import org.team.defee.member.entity.Member;
+import org.team.defee.member.service.AuthService;
 import org.team.defee.member.service.MemberService;
 
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/member")
+@RequestMapping("/api/members")
 public class MemberController {
     private final MemberService memberService;
+    private final AuthService authService;
 
     @GetMapping("/test")
     public String test(){
@@ -31,12 +35,39 @@ public class MemberController {
     }
 
     @PostMapping
-    public ResponseEntity<String> register(@RequestBody Member member){
+    public ResponseEntity<String> register(@RequestBody RegisterDto dto){
         try {
-            Long userId = memberService.register(member);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Member registered with id: " + userId);
+            Long userId = memberService.register(dto);
+            return ResponseEntity.status(HttpStatus.CREATED).body("회원가입 성공: " + userId);
         } catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @PostMapping("/login")
+    // ? -> 변경 예정
+    public ResponseEntity<?> login(@RequestBody LoginDto dto){
+        try {
+            String token = authService.login(dto);
+            return ResponseEntity.status(HttpStatus.OK).body(new JwtResponse(token));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    public static class JwtResponse {
+        private String token;
+
+        public JwtResponse(String token){
+            this.token = token;
+        }
+
+        public String getToken() {
+            return token;
+        }
+
+        public void setToken(String token) {
+            this.token = token;
         }
     }
 }

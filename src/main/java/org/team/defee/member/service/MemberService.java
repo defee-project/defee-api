@@ -3,6 +3,8 @@ package org.team.defee.member.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.team.defee.common.util.HashUtil;
+import org.team.defee.member.dto.RegisterDto;
 import org.team.defee.member.entity.Member;
 import org.team.defee.member.repository.MemberRepository;
 
@@ -13,25 +15,38 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MemberService {
     private final MemberRepository memberRepository;
-    
-    public Long register(Member member){
+    private final HashUtil HashUtil;
 
-        validateEmail(member);
-        validateUsername(member);
+    @Transactional
+    public Long register(RegisterDto dto){
+
+        validateEmail(dto.getEmail());
+        validateUsername(dto.getUsername());
+
+        String hashedPassword = HashUtil.hashPassword(dto.getPassword());
+
+        Member member = new Member();
+        member.setEmail(dto.getEmail());
+        member.setUsername(dto.getUsername());
+        member.setPassword(hashedPassword);
+
+        if (dto.getBlogUrl() != null){
+            member.setBlogUrl(dto.getBlogUrl());
+        }
 
         memberRepository.save(member);
         return member.getId();
     }
 
-    private void validateEmail(Member member) {
-        List<Member> findUsers = memberRepository.findByEmail(member.getEmail());
+    private void validateEmail(String email) {
+        List<Member> findUsers = memberRepository.findByEmail(email);
         if (!findUsers.isEmpty()){
             throw new IllegalStateException("이미 사용중인 이메일입니다.");
         }
     }
 
-    private void validateUsername(Member member) {
-        List<Member> findMembers = memberRepository.findByUsername(member.getUsername());
+    private void validateUsername(String username) {
+        List<Member> findMembers = memberRepository.findByUsername(username);
         if (!findMembers.isEmpty()){
             throw new IllegalStateException("이미 사용중인 아이디입니다.");
         }
@@ -43,5 +58,9 @@ public class MemberService {
 
     public Member findOne(Long memberId){
         return memberRepository.findOne(memberId);
+    }
+
+    public Member findOneByEmail(String email){
+        return memberRepository.findByEmail(email).get(0);
     }
 }
