@@ -30,6 +30,9 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
 
+	//dotenv
+	implementation("io.github.cdimascio:java-dotenv:5.2.2")
+
 	//security
 	implementation("org.springframework.boot:spring-boot-starter-security")
 

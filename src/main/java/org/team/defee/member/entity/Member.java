@@ -25,7 +25,8 @@ public class Member {
     @Column(nullable = false)
     private String username;
 
-    private String blog_url;
+    @Column(name = "blog_url")
+    private String blogUrl;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bookmark> bookmarks;
