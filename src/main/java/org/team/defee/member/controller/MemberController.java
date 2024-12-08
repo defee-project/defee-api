@@ -1,5 +1,9 @@
 package org.team.defee.member.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/member")
+@Tag(name="Member", description = "회원 통합 API")
 public class MemberController {
     private final MemberService memberService;
 
@@ -21,6 +26,7 @@ public class MemberController {
     }
 
     @GetMapping
+
     public ResponseEntity<List<Member>> getAllMembers(){
         try {
             List<Member> users = memberService.findMembers();
