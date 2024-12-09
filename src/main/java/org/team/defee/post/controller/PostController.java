@@ -5,6 +5,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.team.defee.post.entity.Post;
 import org.team.defee.post.service.PostService;
@@ -30,14 +32,16 @@ public class PostController {
             @Parameter(name = "keyword", description = "키워드", example = "new"),
             @Parameter(name = "page", description = "페이지", example = "0")
     })
-    public List<Post> getKeywordPosts(
+    public ResponseEntity<List<Post>> getKeywordPosts(
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "page", defaultValue = "0") int page
     ) {
         if (page < 0) {
             throw new IllegalArgumentException("page는 0이거나 커야합니다.");
         }
-        return postService.findPostsByKeyword(keyword, page);
+        List<Post> postList = postService.findPostsByKeyword(keyword, page);
+
+        return ResponseEntity.status(HttpStatus.OK).body(postList);
     }
 
     @GetMapping()
@@ -46,13 +50,15 @@ public class PostController {
             @Parameter(name = "bookmark", description = "북마크", example = ""),
             @Parameter(name = "page", description = "페이지", example = "0")
     })
-    public List<Post> getBookmarkPosts(
+    public ResponseEntity<List<Post>> getBookmarkPosts(
             @RequestParam(value = "bookmark", required = false) String bookmark,
             @RequestParam(value = "page", defaultValue = "0") int page
     ) {
         if (page < 0) {
             throw new IllegalArgumentException("page는 0이거나 커야합니다.");
         }
-        return postService.findPostsByBookmark(bookmark, page);
+        List<Post> postList = postService.findPostsByBookmark(bookmark, page);
+        return ResponseEntity.status(HttpStatus.OK).body(postList);
+
     }
 }
