@@ -5,11 +5,13 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.team.defee.post.entity.Post;
 import org.team.defee.post.service.PostService;
+import org.team.defee.post.service.VelogWebCrawler;
 
 import java.util.List;
 
@@ -19,6 +21,7 @@ import java.util.List;
 @Tag(name = "Post", description = "게시글 통합 API")
 public class PostController {
     private final PostService postService;
+    private final VelogWebCrawler velogWebCrawler;
 
     @GetMapping("/test")
     @Operation(summary = "게시글 테스트 api", description = "테스트용 api")
@@ -60,5 +63,16 @@ public class PostController {
         List<Post> postList = postService.findPostsByBookmark(bookmark, page);
         return ResponseEntity.status(HttpStatus.OK).body(postList);
 
+    }
+
+    @PostMapping("/crawl")
+    public ResponseEntity<String> crawlPosts() {
+        try {
+            velogWebCrawler.crawlPosts();
+            return ResponseEntity.ok("크롤링 성공");
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.badRequest().body("크롤링 실패");
+        }
     }
 }

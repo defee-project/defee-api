@@ -11,6 +11,7 @@ public class HashUtil {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+    // salt 추가
     public String hashPassword(String password){
         return bCryptPasswordEncoder.encode(password);
     }

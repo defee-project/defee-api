@@ -36,7 +36,7 @@ public class Post {
     private LocalDateTime date;
 
     @Column(nullable = false)
-    private Float score;
+    private Double score;
 
     @Column(nullable = false)
     private String thumbnailUrl;

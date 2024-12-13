@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.team.defee.common.util.JwtUtil;
+import org.team.defee.post.service.VelogWebCrawler;
 
 @SpringBootApplication
 public class DefeeApplication {
