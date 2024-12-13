@@ -42,7 +42,7 @@ public class MockDataConfig {
                 post.setAuthor("Author " + i);
                 post.setPlatfrom(Platfrom.values()[i % Platfrom.values().length]); // Cycle through enum values
                 post.setDate(LocalDateTime.now().minusDays(i));
-                post.setScore((float) (Math.random() * 10)); // Random score between 0 and 10
+                post.setScore((Math.random() * 10)); // Random score between 0 and 10
                 post.setThumbnailUrl("https://example.com/thumbnail-" + i);
 
                 // Assign random Bookmarks and Keywords
