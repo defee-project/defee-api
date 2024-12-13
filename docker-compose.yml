@@ -1,0 +1,31 @@
+services:
+  defee_db:
+    image: mysql:8.0
+    container_name: defee_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: defee
+      MYSQL_USER: defee
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: Asia/Seoul
+    ports:
+      - '3307:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+
+  defee_spring:
+    build: .
+    container_name: defee_backend
+    depends_on:
+      - defee_db
+    environment:
+      TZ: Asia/Seoul
+      DATABASE_URL: mysql://defee:${MYSQL_PASSWORD}@defee_db:3306/defee
+    volumes:
+      -
+    ports:
+      - '8080:8080'
+
+volumes:
+  db_data:
+    driver: local

@@ -40,7 +40,7 @@ public class MemberController {
         }
     }
 
-    @PostMapping
+    @PostMapping("/register")
     @Operation(summary = "회원가입 api", description = "회원가입 api입니다.")
     @Parameters({
             @Parameter(name = "email", description = "이메일", example = "test@test.com"),
