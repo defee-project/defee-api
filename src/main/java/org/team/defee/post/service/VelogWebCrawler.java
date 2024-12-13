@@ -5,6 +5,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.stereotype.Component;
 import org.team.defee.post.entity.Post;
 import org.team.defee.post.enums.Platfrom;
@@ -24,33 +29,44 @@ public class VelogWebCrawler {
     private final PostRepository postRepository;
 
     public void crawlPosts() {
+
+        System.setProperty("webdriver.chrome.driver", "chromedriver-win64"); // chromedriver 경로 설정
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // 브라우저를 보이지 않게 실행
+        WebDriver driver = new ChromeDriver(options);
+
         try {
-            List<Post> posts = new ArrayList<>();
-            Document doc = Jsoup.connect("https://velog.io/").get();
+//            List<Post> posts = new ArrayList<>();
+//            Document doc = Jsoup.connect("https://velog.io/").get();
 
-            Elements elements = doc.select(".PostCard_block");
-            for (Element element: elements) {
-                String title = element.select("h4").text();
-                String url = element.select("a").attr("href");
-                String author = element.select(".subinfo.profile span").text();
-                String dateTimeString = element.select("time").attr("datetime");
-                LocalDateTime date = ZonedDateTime.parse(dateTimeString).toLocalDateTime();
+            driver.get("https://velog.io/");
 
-                String score = element.select("span").text();
-                String thumbnail = element.select(".thumbnail-wrapper img").attr("src");
+            System.out.println("test for crawling");
+            List<WebElement> listItems = driver.findElements(By.cssSelector("ul.PostCardGrid_block__AcTqY > li"));            // Elements listItems = doc.getElementsByClass("PostCardGrid_block__AcTqY");
 
-                Post post = new Post();
-                post.setTitle(title);
-                post.setUrl(url);
-                post.setAuthor(author);
-                post.setPlatfrom(Platfrom.VELOG);
-                post.setDate(date);
-                post.setScore(1.0f);
-                post.setThumbnailUrl(thumbnail);
+            for (WebElement listItem: listItems) {
+                System.out.println(listItem);
+//                String title = element.select("h4").text();
+//                String url = element.select("a").attr("href");
+//                String author = element.select(".subinfo.profile span").text();
+//                String dateTimeString = element.select("time").attr("datetime");
+//                LocalDateTime date = ZonedDateTime.parse(dateTimeString).toLocalDateTime();
+//
+//                String score = element.select("span").text();
+//                String thumbnail = element.select(".thumbnail-wrapper img").attr("src");
 
-                postRepository.save(post);
+//                Post post = new Post();
+//                post.setTitle(title);
+//                post.setUrl(url);
+//                post.setAuthor(author);
+//                post.setPlatfrom(Platfrom.VELOG);
+//                post.setDate(date);
+//                post.setScore(1.0f);
+//                post.setThumbnailUrl(thumbnail);
+//
+//                postRepository.save(post);
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

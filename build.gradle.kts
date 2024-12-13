@@ -44,7 +44,12 @@ dependencies {
 	//jsoup crawler
 	implementation("org.jsoup:jsoup:1.18.3")
 
+	//selenuim
+	implementation("org.seleniumhq.selenium:selenium-java:2.41.0")
 
+
+	//swagger
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
