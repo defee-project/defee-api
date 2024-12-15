@@ -1,6 +1,7 @@
 package org.team.defee.post.service;
 
 import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -123,6 +124,7 @@ public class VelogWebCrawlerService {
     }
 
     // 크롤러 종료 처리 (자원 정리)
+    @PreDestroy
     public void shutdown() {
         if (driver != null) {
             driver.quit(); // WebDriver 종료
