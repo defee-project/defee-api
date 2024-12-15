@@ -28,7 +28,7 @@ public class PostRepository {
     }
 
     public List<Post> findPostsByKeyword(String keyword, int page) {
-        return em.createQuery("select p from Post p join p.keywords k where k.keyword = :keyword order by p.date desc", Post.class)
+        return em.createQuery("select p from Post p join p.keywords k where k.keyword = :keyword order by p.score desc", Post.class)
                 .setParameter("keyword", keyword)
                 .setFirstResult(page * 10)
                 .setMaxResults(10)
