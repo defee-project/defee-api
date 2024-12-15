@@ -12,6 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.team.defee.post.entity.Post;
 import org.team.defee.post.enums.Platfrom;
@@ -32,6 +34,8 @@ public class VelogWebCrawler {
     private final PostService postService;
     private final PostRepository postRepository;
 
+    @Async("asyncExecutor")
+    @Scheduled(fixedRate = 28800000) //
     public void crawlPosts() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless"); // 브라우저를 보이지 않게 실행
