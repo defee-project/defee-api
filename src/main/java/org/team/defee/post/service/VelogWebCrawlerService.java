@@ -9,6 +9,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.team.defee.post.entity.Post;
 import org.team.defee.post.enums.Platfrom;
@@ -63,6 +65,8 @@ public class VelogWebCrawlerService {
     }
 
     // 크롤링 시작 메서드
+    @Async("asyncExecutor")
+    @Scheduled(fixedRate = 28800000) //
     public void crawlPosts() {
         // 대기 조건 설정 (10초)
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
