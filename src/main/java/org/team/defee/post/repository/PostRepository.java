@@ -21,6 +21,12 @@ public class PostRepository {
                 .getResultList();
     }
 
+    public List<Post> findPostByTitle(String title) {
+        return em.createQuery("select p from Post p where p.title = :title", Post.class)
+                .setParameter("title", title)
+                .getResultList();
+    }
+
     public List<Post> findPostsByKeyword(String keyword, int page) {
         return em.createQuery("select p from Post p join p.keywords k where k.keyword = :keyword order by p.date desc", Post.class)
                 .setParameter("keyword", keyword)
