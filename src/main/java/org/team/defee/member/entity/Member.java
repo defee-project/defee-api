@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.team.defee.bookmark.entity.Bookmark;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,5 +30,5 @@ public class Member {
     private String blogUrl;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Bookmark> bookmarks;
+    private List<Bookmark> bookmarks = new ArrayList<>();
 }
