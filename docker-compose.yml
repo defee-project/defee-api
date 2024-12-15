@@ -6,10 +6,10 @@ services:
     image: mysql:8.0
     container_name: defee_db
     environment:
-      MYSQL_ROOT_PASSWORD: defee2024
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: defee
       MYSQL_USER: defee
-      MYSQL_PASSWORD: defee2024
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: Asia/Seoul
     ports:
       - "3307:3306"
