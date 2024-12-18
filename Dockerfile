@@ -23,6 +23,7 @@ ENV PATH="/usr/local/bin:${PATH}"
 WORKDIR /app
 
 COPY . .
+
 RUN ./gradlew clean bootJar
 
 ARG JAR_FILE=build/libs/*.jar
