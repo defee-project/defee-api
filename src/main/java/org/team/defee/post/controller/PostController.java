@@ -47,22 +47,29 @@ public class PostController {
     }
 
     @GetMapping()
-    @Operation(summary = "북마크 게시글 조회 api", description = "북마크 페이지에서 사용하는 게시글 조회 api입니다.")
-    @Parameters({
-            @Parameter(name = "bookmark", description = "북마크", example = ""),
-            @Parameter(name = "page", description = "페이지", example = "0")
-    })
-    public ResponseEntity<List<Post>> getBookmarkPosts(
-            @RequestParam(value = "bookmark", required = false) String bookmark,
-            @RequestParam(value = "page", defaultValue = "0") int page
-    ) {
-        if (page < 0) {
-            throw new IllegalArgumentException("page는 0이거나 커야합니다.");
-        }
-        List<Post> postList = postService.findPostsByBookmark(bookmark, page);
+    @Operation(summary = "모든 게시글 조회 api", description = "모든 게시글 조회 api입니다.")
+    public ResponseEntity<List<Post>> getAllPosts() {
+        List<Post> postList = postService.findAllPosts();
         return ResponseEntity.status(HttpStatus.OK).body(postList);
-
     }
+
+//    @GetMapping()
+//    @Operation(summary = "북마크 게시글 조회 api", description = "북마크 페이지에서 사용하는 게시글 조회 api입니다.")
+//    @Parameters({
+//            @Parameter(name = "bookmark", description = "북마크", example = ""),
+//            @Parameter(name = "page", description = "페이지", example = "0")
+//    })
+//    public ResponseEntity<List<Post>> getBookmarkPosts(
+//            @RequestParam(value = "bookmark", required = false) String bookmark,
+//            @RequestParam(value = "page", defaultValue = "0") int page
+//    ) {
+//        if (page < 0) {
+//            throw new IllegalArgumentException("page는 0이거나 커야합니다.");
+//        }
+//        List<Post> postList = postService.findPostsByBookmark(bookmark, page);
+//        return ResponseEntity.status(HttpStatus.OK).body(postList);
+//
+//    }
 
     @PostMapping("/crawl")
     public ResponseEntity<String> crawlPosts() {

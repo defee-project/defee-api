@@ -15,6 +15,10 @@ import java.util.Objects;
 public class PostService {
     private final PostRepository postRepository;
 
+    public List<Post> findAllPosts () {
+        return postRepository.findAll();
+    }
+
     public List<Post> findPostsByKeyword(String keyword, int page) {
         if (Objects.equals(keyword, "new")){
             return postRepository.findNewPosts(page);
