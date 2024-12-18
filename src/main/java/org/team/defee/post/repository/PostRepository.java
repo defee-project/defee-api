@@ -43,6 +43,11 @@ public class PostRepository {
                 .getResultList();
     }
 
+    public List<Post> findAll() {
+        return em.createQuery("select p from Post p", Post.class)
+                .getResultList();
+    }
+
     public Post save(Post post) {
         em.persist(post);
         return post;
