@@ -3,6 +3,7 @@ package org.team.defee.keyword.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.team.defee.Follow.entity.Follow;
 import org.team.defee.post.entity.Post;
 
 import java.util.List;
@@ -22,4 +23,6 @@ public class Keyword {
     @ManyToMany(mappedBy = "keywords")
     private List<Post> posts;
 
+    @ManyToMany(mappedBy = "keywords")
+    private List<Follow> follows;
 }
