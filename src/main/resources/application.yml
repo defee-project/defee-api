@@ -2,17 +2,17 @@ spring:
   application:
     name: defee
   datasource:
-    url: jdbc:h2:tcp://localhost/~/defee
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-#    url: jdbc:mysql://defee:defee2024@defee_db:3306/defee
-#    username: root
-#    password: defee2024
-#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/defee
+    #    username: root
+    #    password: 175619aA_
+    url: jdbc:mysql://defee_db:3306/defee
+    username: defee
+    password: defee2024
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
+      dialect: org.hibernate.dialect.MySQL8Dialect
       ddl-auto: create-drop
     properties:
       hibernate:

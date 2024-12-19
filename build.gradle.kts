@@ -41,6 +41,13 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
+	//jsoup crawler
+	implementation("org.jsoup:jsoup:1.18.3")
+
+	//selenuim
+	implementation("org.seleniumhq.selenium:selenium-java:2.41.0")
+
+
 	//swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 

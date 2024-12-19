@@ -1,5 +1,6 @@
 package org.team.defee.post.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,10 +34,11 @@ public class Post {
     private Platfrom platfrom;
 
     @Column(nullable = false)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime date;
 
     @Column(nullable = false)
-    private Float score;
+    private Double score;
 
     @Column(nullable = false)
     private String thumbnailUrl;

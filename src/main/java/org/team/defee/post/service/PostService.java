@@ -15,15 +15,19 @@ import java.util.Objects;
 public class PostService {
     private final PostRepository postRepository;
 
-    public List<Post> findPostsByKeyword(String keyword, int page) {
-        if (Objects.equals(keyword, "new")){
-            return postRepository.findNewPosts(page);
-        }else {
-            return postRepository.findPostsByKeyword(keyword, page);
-        }
+    public List<Post> findAllPosts () {
+        return postRepository.findAll();
     }
 
-    public List<Post> findPostsByBookmark(String bookmark, int page) {
-        return postRepository.findPostsByBookmark(bookmark, page);
-    }
+//    public List<Post> findPostsByKeyword(String keyword, int page) {
+//        if (Objects.equals(keyword, "new")){
+//            return postRepository.findNewPosts(page);
+//        }else {
+//            return postRepository.findPostsByKeyword(keyword, page);
+//        }
+//    }
+//
+//    public List<Post> findPostsByBookmark(String bookmark, int page) {
+//        return postRepository.findPostsByBookmark(bookmark, page);
+//    }
 }
