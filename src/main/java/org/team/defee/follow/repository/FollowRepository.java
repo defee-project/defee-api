@@ -1,9 +1,9 @@
-package org.team.defee.Follow.repository;
+package org.team.defee.follow.repository;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.team.defee.Follow.entity.Follow;
+import org.team.defee.follow.entity.Follow;
 
 @Repository
 @RequiredArgsConstructor

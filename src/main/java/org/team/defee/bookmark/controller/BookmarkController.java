@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.team.defee.bookmark.dto.AddBookmarkDto;
 import org.team.defee.bookmark.service.BookmarkService;
 import org.team.defee.bookmark.dto.CreateBookmarkDto;
 
@@ -18,8 +19,14 @@ public class BookmarkController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createBookmark(@RequestBody CreateBookmarkDto createBookmarkDto) {
+        System.out.println(createBookmarkDto.getBookmark());
         String bookmarkName = bookmarkService.createBookmark(createBookmarkDto.getBookmark(), createBookmarkDto.getEmail());
         return ResponseEntity.status(HttpStatus.CREATED).body(bookmarkName +"폴더 추가 완료");
     }
 
+    @PostMapping("/add")
+    public ResponseEntity<String> addBookmark(@RequestBody AddBookmarkDto addBookmarkDto) {
+        bookmarkService.addBookmark(addBookmarkDto.getEmail(), addBookmarkDto.getBookmark(), addBookmarkDto.getPostId());
+        return ResponseEntity.status(HttpStatus.CREATED).body("북마크 추가 완료");
+    }
 }

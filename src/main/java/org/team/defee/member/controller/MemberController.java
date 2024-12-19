@@ -42,12 +42,6 @@ public class MemberController {
 
     @PostMapping("/register")
     @Operation(summary = "회원가입 api", description = "회원가입 api입니다.")
-    @Parameters({
-            @Parameter(name = "email", description = "이메일", example = "test@test.com"),
-            @Parameter(name = "password", description = "패스워드", example = "1234"),
-            @Parameter(name = "username", description = "유저이름", example = "테스터"),
-            @Parameter(name = "blogUrl", description = "블로그주소", example = "https://velog.io")
-    })
     public ResponseEntity<String> register(@RequestBody RegisterDto dto){
         try {
             Long userId = memberService.register(dto);

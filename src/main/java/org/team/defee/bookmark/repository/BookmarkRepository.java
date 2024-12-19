@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.team.defee.bookmark.entity.Bookmark;
+import org.team.defee.member.entity.Member;
+import org.team.defee.post.entity.Post;
 
 import java.util.List;
 
@@ -30,5 +32,19 @@ public class BookmarkRepository {
     public List<Bookmark> findAll(){
         return em.createQuery("select b from Bookmark b", Bookmark.class)
                 .getResultList();
+    }
+
+    public Bookmark findUserBookmark(Long memberId, String bookmark){
+        return em.createQuery("select b from Bookmark b where b.folderName = :bookmark and b.member.id = :memberId", Bookmark.class)
+                .setParameter("bookmark", bookmark)
+                .setParameter("memberId", memberId)
+                .getSingleResult();
+    }
+
+    public void addBookmarkByPost(Long bookmarkId, Long postId){
+        Bookmark bookmark = em.find(Bookmark.class, bookmarkId);
+        Post post = em.find(Post.class, postId);
+        bookmark.getPosts().add(post);
+        em.persist(bookmark);
     }
 }
