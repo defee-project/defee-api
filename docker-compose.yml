@@ -1,3 +1,6 @@
+## docker-compose up -d --build
+## docker-compose down
+
 services:
   defee_db:
     image: mysql:8.0
@@ -9,22 +12,20 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       TZ: Asia/Seoul
     ports:
-      - '3307:3306'
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
 
-  defee_spring:
+  defee_springapp:
     build: .
-    container_name: defee_backend
+    container_name: defee_springapp
     depends_on:
       - defee_db
     environment:
       TZ: Asia/Seoul
       DATABASE_URL: mysql://defee:${MYSQL_PASSWORD}@defee_db:3306/defee
-    volumes:
-      -
     ports:
-      - '8080:8080'
+      - "8080:8080"
 
 volumes:
   db_data:

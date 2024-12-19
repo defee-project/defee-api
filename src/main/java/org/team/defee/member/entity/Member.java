@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.team.defee.bookmark.entity.Bookmark;
+import org.team.defee.follow.entity.Follow;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,5 +31,8 @@ public class Member {
     private String blogUrl;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Bookmark> bookmarks;
+    private List<Bookmark> bookmarks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Follow> follows = new ArrayList<>();
 }
