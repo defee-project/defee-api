@@ -7,5 +7,4 @@ import lombok.Setter;
 @Setter
 public class CreateBookmarkDto {
     private String bookmark;
-    private String email;
 }

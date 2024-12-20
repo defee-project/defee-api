@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AddBookmarkDto {
-    private String email;
     private String bookmark;
     private Long postId;
 }

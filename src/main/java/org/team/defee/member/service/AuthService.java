@@ -13,6 +13,7 @@ public class AuthService {
     private final MemberService memberService;
     private final HashUtil HashUtil;
 
+
     public String login(LoginDto dto){
         Member member = memberService.findOneByEmail(dto.getEmail());
         if (member == null){
@@ -24,4 +25,15 @@ public class AuthService {
         }
         return JwtUtil.generateToken(member.getEmail());
     }
+
+    public Member checkJwtToken(String jwtToken){
+        if (JwtUtil.validateToken(jwtToken)){
+            String email = JwtUtil.extractEmail(jwtToken);
+            return memberService.findOneByEmail(email);
+        } else{
+            return null;
+        }
+
+    }
+
 }
