@@ -1,5 +1,7 @@
 package org.team.defee.follow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +24,7 @@ public class Follow {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
 
     @ManyToMany
@@ -30,6 +33,7 @@ public class Follow {
             joinColumns = @JoinColumn(name = "follow_id"),
             inverseJoinColumns = @JoinColumn(name = "keyword_id")
     )
+    @JsonIgnore
     private List<Keyword> keywords;
 }
 

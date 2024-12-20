@@ -1,5 +1,7 @@
 package org.team.defee.keyword.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,8 +23,10 @@ public class Keyword {
     private String keyword;
 
     @ManyToMany(mappedBy = "keywords")
+    @JsonIgnore
     private List<Post> posts;
 
     @ManyToMany(mappedBy = "keywords")
+    @JsonIgnore
     private List<Follow> follows;
 }

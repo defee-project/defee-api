@@ -27,6 +27,10 @@ public class PostRepository {
                 .getResultList();
     }
 
+    public Post findById(Long postId){
+        return em.find(Post.class, postId);
+    }
+
 //    public List<Post> findPostsByKeyword(String keyword, int page) {
 //        return em.createQuery("select p from Post p join p.keywords k where k.keyword = :keyword order by p.score desc", Post.class)
 //                .setParameter("keyword", keyword)

@@ -1,6 +1,8 @@
 package org.team.defee.post.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,12 +45,13 @@ public class Post {
     @Column(nullable = false)
     private String thumbnailUrl;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "BookmarkPosts",
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "bookmark_id")
     )
+    @JsonIgnore
     private List<Bookmark> bookmarks;
 
     @ManyToMany
@@ -57,6 +60,7 @@ public class Post {
             joinColumns = @JoinColumn(name = "post_id"),
             inverseJoinColumns = @JoinColumn(name = "keyword_id")
     )
+    @JsonIgnore
     private List<Keyword> keywords;
 
 }

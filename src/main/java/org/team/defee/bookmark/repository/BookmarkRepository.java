@@ -41,10 +41,10 @@ public class BookmarkRepository {
                 .getSingleResult();
     }
 
-    public void addBookmarkByPost(Long bookmarkId, Long postId){
-        Bookmark bookmark = em.find(Bookmark.class, bookmarkId);
-        Post post = em.find(Post.class, postId);
-        bookmark.getPosts().add(post);
-        em.persist(bookmark);
-    }
+//    public void addBookmarkByPost(Long bookmarkId, Long postId){
+//        Bookmark bookmark = em.find(Bookmark.class, bookmarkId);
+//        Post post = em.find(Post.class, postId);
+//        bookmark.getPosts().add(post);
+//        em.persist(bookmark);
+//    }
 }
