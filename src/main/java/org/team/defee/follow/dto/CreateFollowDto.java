@@ -1,4 +1,4 @@
-package org.team.defee.Follow.dto;
+package org.team.defee.follow.dto;
 
 import lombok.Getter;
 import lombok.Setter;
