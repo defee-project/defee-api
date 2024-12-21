@@ -1,10 +1,13 @@
 package org.team.defee.follow.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.team.defee.keyword.entity.Keyword;
 import org.team.defee.member.entity.Member;
+import org.team.defee.post.entity.Post;
 
 import java.util.List;
 
@@ -17,18 +20,21 @@ public class Follow {
     @Column(name = "follow_id")
     private Long id;
 
-    @Column(name = "folder_name")
+    @Column
     private String folderName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id") // 외래키 칼럼 이름을 user_id로 설정
+    @JoinColumn(name = "member_id")
+    @JsonIgnore
     private Member member;
 
     @ManyToMany
     @JoinTable(
-            name = "FollowKeyword",
+            name = "FollowKeywords",
             joinColumns = @JoinColumn(name = "follow_id"),
             inverseJoinColumns = @JoinColumn(name = "keyword_id")
     )
+    @JsonIgnore
     private List<Keyword> keywords;
 }
+

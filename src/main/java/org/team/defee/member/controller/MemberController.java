@@ -42,7 +42,6 @@ public class MemberController {
 
     @PostMapping("/register")
     @Operation(summary = "회원가입 api", description = "회원가입 api입니다.")
-
     public ResponseEntity<String> register(@RequestBody RegisterDto dto){
         try {
             Long userId = memberService.register(dto);
