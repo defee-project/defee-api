@@ -1,10 +1,10 @@
-package org.team.defee.Follow.service;
+package org.team.defee.follow.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.team.defee.Follow.entity.Follow;
-import org.team.defee.Follow.repository.FollowRepository;
+import org.team.defee.follow.entity.Follow;
+import org.team.defee.follow.repository.FollowRepository;
 import org.team.defee.member.entity.Member;
 import org.team.defee.member.service.MemberService;
 

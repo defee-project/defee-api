@@ -3,8 +3,8 @@ package org.team.defee.follow.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.team.defee.keyword.entity.Keyword;
 import org.team.defee.member.entity.Member;
-import org.team.defee.post.entity.Post;
 
 import java.util.List;
 
@@ -17,13 +17,18 @@ public class Follow {
     @Column(name = "follow_id")
     private Long id;
 
-    @Column
-    private String folder_name;
+    @Column(name = "folder_name")
+    private String folderName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "user_id") // 외래키 칼럼 이름을 user_id로 설정
     private Member member;
+
+    @ManyToMany
+    @JoinTable(
+            name = "FollowKeyword",
+            joinColumns = @JoinColumn(name = "follow_id"),
+            inverseJoinColumns = @JoinColumn(name = "keyword_id")
+    )
+    private List<Keyword> keywords;
 }
-
-
-

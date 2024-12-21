@@ -3,7 +3,7 @@ package org.team.defee.keyword.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.team.defee.Follow.entity.Follow;
+import org.team.defee.follow.entity.Follow;
 import org.team.defee.post.entity.Post;
 
 import java.util.List;
