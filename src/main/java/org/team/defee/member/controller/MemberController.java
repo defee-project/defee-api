@@ -53,10 +53,6 @@ public class MemberController {
 
     @PostMapping("/login")
     @Operation(summary = "로그인 api", description = "로그인 api입니다.")
-    @Parameters({
-            @Parameter(name = "email", description = "이메일", example = "test@test.com"),
-            @Parameter(name = "password", description = "패스워드", example = "1234")
-    })
     // ? -> 변경 예정
     public ResponseEntity<?> login(@RequestBody LoginDto dto){
         try {
