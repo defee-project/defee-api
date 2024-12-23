@@ -23,9 +23,9 @@ public class PostController {
     private final VelogWebCrawlerService velogWebCrawlerService;
 
     @GetMapping("/test")
-    @Operation(summary = "게시글 테스트 api", description = "테스트용 api")
+    @Operation(summary = "게시글 테스트 api TEST!!!", description = "테스트용 api")
     public String test() {
-        return "hello";
+        return "hello post test!";
     }
 
 //    @GetMapping("/headline")

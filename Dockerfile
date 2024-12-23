@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 openjdk:17.0.1-jdk-slim
+FROM openjdk:17.0.1-jdk-slim
 
 RUN apt-get -y update
 RUN apt -y install wget
@@ -20,18 +20,13 @@ RUN chmod +x /usr/local/bin/chromedriver
 # chromedriver를 PATH에 추가
 ENV PATH="/usr/local/bin:${PATH}"
 
-WORKDIR /app
-
-COPY . .
-
-RUN ./gradlew clean bootJar
+CMD [ "./gradlew", "clean", "build"]
 
 ARG JAR_FILE=build/libs/*.jar
 
 COPY ${JAR_FILE} app.jar
 
-# Spring Boot 애플리케이션 실행
-ENTRYPOINT ["java", "-jar", "app.jar"]
-
 EXPOSE 8080
 
+# Spring Boot 애플리케이션 실행
+ENTRYPOINT ["java", "-jar", "app.jar"]
