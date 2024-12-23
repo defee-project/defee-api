@@ -23,6 +23,10 @@ public class BookmarkService {
     @Transactional
     public String createBookmark(String bookmarkName, String memberEmail){
         Member member = memberService.findOneByEmail(memberEmail);
+        Bookmark duplicateBookmark = bookmarkRepository.findUserBookmark(member.getId(), bookmarkName);
+        if (duplicateBookmark != null) {
+            return null;
+        }
         Bookmark bookmark = new Bookmark();
         bookmark.setFolderName(bookmarkName);
         bookmark.setMember(member);
@@ -37,6 +41,11 @@ public class BookmarkService {
 
         Bookmark bookmark = bookmarkRepository.findUserBookmark(memberId, bookmarkName);
         Post post = postRepository.findById(postId);
+
+        // 이미 북마크에 동일한 포스트가 존재하는지 확인
+        if (bookmark.getPosts().contains(post)) {
+            return null;
+        }
 
         bookmark.getPosts().add(post);
         post.getBookmarks().add(bookmark);

@@ -2,9 +2,9 @@ spring:
   application:
     name: defee
   datasource:
-#    url: jdbc:mysql://localhost:3306/defee
-    #    username: root
-    #    password: 175619aA_
+#        url: jdbc:mysql://localhost:3306/defee
+#        username: root
+#        password: 175619aA_
     url: jdbc:mysql://defee_db:3306/defee
     username: defee
     password: defee2024

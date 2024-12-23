@@ -34,7 +34,13 @@ public class BookmarkController {
         } else {
             String token = Objects.requireNonNull(authorizationHeader).substring(7);
             Member member = AuthService.checkJwtToken(token);
+            if (member == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
             String bookmarkName = bookmarkService.createBookmark(createBookmarkDto.getBookmark(), member.getEmail());
+            if (bookmarkName == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 북마크가 이미 존재합니다.");
+            }
             return ResponseEntity.status(HttpStatus.CREATED).body(bookmarkName + "폴더 추가 완료");
         }
 
@@ -49,7 +55,13 @@ public class BookmarkController {
         } else {
             String token = Objects.requireNonNull(authorizationHeader).substring(7);
             Member member = AuthService.checkJwtToken(token);
-            bookmarkService.addBookmark(member.getEmail(), addBookmarkDto.getBookmark(), addBookmarkDto.getPostId());
+            if (member == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
+            String result = bookmarkService.addBookmark(member.getEmail(), addBookmarkDto.getBookmark(), addBookmarkDto.getPostId());
+            if (result == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("해당 북마크에 게시글이 이미 존재합니다.");
+            }
             return ResponseEntity.status(HttpStatus.CREATED).body("북마크 추가 완료");
 
         }
@@ -64,6 +76,9 @@ public class BookmarkController {
         } else {
             String token = Objects.requireNonNull(authorizationHeader).substring(7);
             Member member = AuthService.checkJwtToken(token);
+            if (member == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
             List<Post> postList = bookmarkService.getPostsByBookmark(member.getEmail(), bookmark);
             return ResponseEntity.status(HttpStatus.OK).body(postList);
 
