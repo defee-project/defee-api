@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.team.defee.keyword.entity.Keyword;
 import org.team.defee.member.entity.Member;
+import org.team.defee.post.entity.Post;
 
 import java.util.List;
 
