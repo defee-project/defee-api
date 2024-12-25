@@ -1,4 +1,4 @@
-FROM openjdk:17.0.1-jdk-slim
+FROM --platform=linux/amd64 openjdk:17.0.1-jdk-slim
 
 RUN apt-get -y update
 RUN apt -y install wget
