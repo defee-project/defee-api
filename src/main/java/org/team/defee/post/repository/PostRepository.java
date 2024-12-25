@@ -3,6 +3,7 @@ package org.team.defee.post.repository;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.team.defee.post.entity.Post;
 
@@ -29,6 +30,12 @@ public class PostRepository {
 
     public Post findById(Long postId){
         return em.find(Post.class, postId);
+    }
+
+    public List<Post> search(String word){
+        return em.createQuery("select p from Post p where p.title like :search", Post.class)
+                .setParameter("search", '%' + word + '%')
+                .getResultList();
     }
 
 //    public List<Post> findPostsByKeyword(String keyword, int page) {

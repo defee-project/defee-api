@@ -19,6 +19,10 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public List<Post> searchPosts(String word) {
+        return postRepository.search(word);
+    }
+
 //    public List<Post> findPostsByKeyword(String keyword, int page) {
 //        if (Objects.equals(keyword, "new")){
 //            return postRepository.findNewPosts(page);
