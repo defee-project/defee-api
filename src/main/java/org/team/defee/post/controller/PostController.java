@@ -71,6 +71,16 @@ public class PostController {
 //
 //    }
 
+    @GetMapping("/search")
+    @Operation(summary = "게시글 제목 검색 api", description = "제목을 기준으로 게시글을 검색하는 api 입니다.")
+    @Parameters({
+            @Parameter(name = "word", description = "검색어")
+    })
+    public ResponseEntity<List<Post>> searchPosts(@RequestParam(value = "word", required = false) String word){
+        List<Post> postList = postService.searchPosts(word);
+        return ResponseEntity.status(HttpStatus.OK).body(postList);
+    }
+
     @PostMapping("/crawl")
     public ResponseEntity<String> crawlPosts() {
         try {
