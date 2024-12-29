@@ -1,6 +1,7 @@
 package org.team.defee.bookmark.repository;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.team.defee.bookmark.entity.Bookmark;
@@ -35,11 +36,17 @@ public class BookmarkRepository {
     }
 
     public Bookmark findUserBookmark(Long memberId, String bookmark){
-        return em.createQuery("select b from Bookmark b where b.folderName = :bookmark and b.member.id = :memberId", Bookmark.class)
-                .setParameter("bookmark", bookmark)
-                .setParameter("memberId", memberId)
-                .getSingleResult();
+        try {
+            return em.createQuery("select b from Bookmark b where b.folderName = :bookmark and b.member.id = :memberId", Bookmark.class)
+                    .setParameter("bookmark", bookmark)
+                    .setParameter("memberId", memberId)
+                    .getSingleResult();
+
+        }catch (NoResultException e){
+            return null;
+        }
     }
+
 
 //    public void addBookmarkByPost(Long bookmarkId, Long postId){
 //        Bookmark bookmark = em.find(Bookmark.class, bookmarkId);
