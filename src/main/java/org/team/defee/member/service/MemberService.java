@@ -38,14 +38,14 @@ public class MemberService {
         return member.getId();
     }
 
-    private void validateEmail(String email) {
+    public void validateEmail(String email) {
         List<Member> findUsers = memberRepository.findByEmail(email);
         if (!findUsers.isEmpty()){
             throw new IllegalStateException("이미 사용중인 이메일입니다.");
         }
     }
 
-    private void validateUsername(String username) {
+    public void validateUsername(String username) {
         List<Member> findMembers = memberRepository.findByUsername(username);
         if (!findMembers.isEmpty()){
             throw new IllegalStateException("이미 사용중인 아이디입니다.");

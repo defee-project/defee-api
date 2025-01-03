@@ -28,23 +28,23 @@ public class PostController {
         return "hello post test!";
     }
 
-//    @GetMapping("/headline")
-//    @Operation(summary = "헤드라인 게시글 조회 api", description = "헤드라인 페이지에서 사용하는 게시글 조회 api입니다.")
-//    @Parameters({
-//            @Parameter(name = "keyword", description = "키워드", example = "new"),
-//            @Parameter(name = "page", description = "페이지", example = "0")
-//    })
-//    public ResponseEntity<List<Post>> getKeywordPosts(
-//            @RequestParam(value = "keyword", required = false) String keyword,
-//            @RequestParam(value = "page", defaultValue = "0") int page
-//    ) {
-//        if (page < 0) {
-//            throw new IllegalArgumentException("page는 0이거나 커야합니다.");
-//        }
-//        List<Post> postList = postService.findPostsByKeyword(keyword, page);
-//
-//        return ResponseEntity.status(HttpStatus.OK).body(postList);
-//    }
+    @GetMapping("/headline")
+    @Operation(summary = "헤드라인 게시글 조회 api", description = "헤드라인 페이지에서 사용하는 게시글 조회 api입니다.")
+    @Parameters({
+            @Parameter(name = "keyword", description = "키워드", example = "new"),
+            @Parameter(name = "page", description = "페이지", example = "0")
+    })
+    public ResponseEntity<List<Post>> getKeywordPosts(
+            @RequestParam(value = "keyword", required = false) String keyword,
+            @RequestParam(value = "page", defaultValue = "0") int page
+    ) {
+        if (page < 0) {
+            throw new IllegalArgumentException("page는 0이거나 커야합니다.");
+        }
+        List<Post> postList = postService.findPostsByKeyword(keyword, page);
+
+        return ResponseEntity.status(HttpStatus.OK).body(postList);
+    }
 
     @GetMapping()
     @Operation(summary = "모든 게시글 조회 api", description = "모든 게시글 조회 api입니다.")
