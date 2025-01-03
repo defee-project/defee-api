@@ -51,6 +51,10 @@ dependencies {
 	//swagger
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0")
 
+	//redis
+	implementation("org.springframework.boot:spring-boot-starter-data-redis")
+	implementation("io.lettuce.core:lettuce-core:6.2.6")
+
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-web")
